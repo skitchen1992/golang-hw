@@ -2,13 +2,23 @@ package main
 
 import (
 	"fmt"
-	"time"
+	"os"
+	"runtime"
 )
 
 func main() {
+	var envName = os.Getenv("USER")
 
-	var now = time.Now()
+	if envName == "" {
+		envName = "Guest"
+	}
 
-	fmt.Println(now.Clock())
+	fmt.Println("Аргументы CLI:")
+
+	for index, argument := range os.Args[1:] {
+		fmt.Printf("%d: %s\n", index+1, argument)
+	}
+
+	fmt.Println("Версия Go:", runtime.Version())
 
 }
